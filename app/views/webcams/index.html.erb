@@ -1,0 +1,21 @@
+<div class="flex my-4">
+    <div class="flex justify-center items-center m-1 py-1 px-2 rounded-full text-green-700 bg-green-100 border border-green-300 text-xs">Forest</div>
+    <div class="flex justify-center items-center m-1 py-1 px-2 rounded-full text-green-700 bg-green-100 border border-green-300 text-xs">Forest</div>
+    <div class="flex justify-center items-center m-1 py-1 px-2 rounded-full text-green-700 bg-green-100 border border-green-300 text-xs">Forest</div>
+    <div class="flex justify-center items-center m-1 py-1 px-2 rounded-full text-green-700 bg-green-100 border border-green-300 text-xs">Forest</div>
+    <div class="flex justify-center items-center m-1 py-1 px-2 rounded-full text-green-700 bg-green-100 border border-green-300 text-xs">Forest</div>
+</div>
+<div class="flex gap-4 flex-wrap justify-center">
+ <% @webcams.each do |webcam| %>
+    <div class="flex flex-col w-[15rem]">
+        <div class="w-full  bg-yellow-300">
+            <img class="w-full" src=<%= webcam.image_url.sub("thumbnail","preview") %> alt="webcam thumbnail">
+        </div>
+        <div class="flex-grow border border-t-0 rounded-b">
+            <div class="p-5">
+                <h1 class="mb-2 font-bold"><%= webcam.title %></h1>
+            </div>
+        </div>
+    </div>
+<% end %>
+</div>
