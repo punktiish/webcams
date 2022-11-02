@@ -16,21 +16,9 @@
       <div class="mx-auto max-w-screen-xl px-4 py-8 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between gap-4">
           <%= link_to "webcams", root_path, class:"text-xl" %>
-          <div class="flex justify-center items-center gap-4">
-            <span class="h-6 rounded-full flex items-center">username  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-down" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-              <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-              <polyline points="6 9 12 15 18 9"></polyline>
-            </svg></span>
-            
-            <a href="#" class="flex shrink-0 items-center">
-              <img
-                alt="Man"
-                src="https://images-webcams.windy.com/26/1199888126/current/preview/1199888126.jpg"
-                class="h-10 w-10 rounded-full object-cover"
-              />
-             
-            </a>
-          </div>
+          <%= link_to new_webcam_path do %>
+            <button class="rounded h-10 w-10 border bg-slate-600 text-xl text-white hover:bg-slate-400">+</button>
+          <% end %>
         </div>
       </div>
     </header>

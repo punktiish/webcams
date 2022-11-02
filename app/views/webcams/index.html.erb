@@ -1,6 +1,7 @@
 <div class="grid grid-cols-5 mt-16 p-6">
     <div class="h-full">
-        <div class="flex gap-1">
+        <%= form_tag(root_path, :method => "get", id: "search-form", :class=>"flex flex-wrap") do %>
+        <span class="flex gap-1">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-horizontal" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
                 <circle cx="14" cy="6" r="2"></circle>
@@ -14,9 +15,8 @@
                 <line x1="19" y1="18" x2="20" y2="18"></line>
             </svg>
             <h1 class="font-bold">Filters</h1>
-        </div>
+        </span>
         <div class="flex my-4 flex-wrap">
-        <%= form_tag(root_path, :method => "get", id: "search-form", :class=>"flex flex-wrap") do %>
             <% @categories.keys.each do |cat| %>
                 <label class="flex justify-center items-center m-1 py-1 px-2 rounded-full text-slate-700 bg-slate-200 text-xs cursor-pointer">
                     <%= check_box_tag ":search[]", cat, false, class: "hidden" %>

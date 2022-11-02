@@ -6,7 +6,6 @@ class WebcamsController < ApplicationController
     else
       @pagy, @webcams = pagy(Webcam.all)
     end
-    puts "web: #{@webcams}"
     @categories = {}
     Webcam.distinct.pluck(:category).each do |cat|
       cat.split(",").each do |s|
