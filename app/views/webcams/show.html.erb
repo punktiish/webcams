@@ -1,0 +1,11 @@
+<div class="flex justify-center flex-wrap">
+    <div class="flex flex-wrap w-6/12 h-full justify-center items-center mt-4 relative">
+        <iframe src=<%= @webcam.player_url %> frameborder="0" class="w-full h-[700px]"></iframe>
+    </div>
+    <div class="flex w-full justify-center hover:text-yellow-900">
+        <ul>
+            <li><%= link_to "Back", root_path %></li>
+            <li><%= link_to "Edit", edit_webcam_path(@webcam) %></li>
+        </ul>
+    </div>
+</div>
