@@ -1,15 +1,16 @@
 include Pagy::Backend
 class WebcamsController < ApplicationController
   def index
-    @pagy, @webcams = pagy(Webcam.all) # <--- increase this later
-    puts "parametri: #{params[":search"]}"
     if params[":search"]
       @pagy, @webcams = pagy(Webcam.search(params[":search"]))
+    else
+      @pagy, @webcams = pagy(Webcam.all)
     end
+    puts "web: #{@webcams}"
     @categories = {}
     Webcam.distinct.pluck(:category).each do |cat|
       cat.split(",").each do |s|
-        if !@categories.include?(s) && s.length > 0
+        if !@categories.include?(s)
           @categories[s] = false
         end
       end
@@ -54,6 +55,6 @@ class WebcamsController < ApplicationController
 
   private
     def webcam_params
-      params.require(:webcam).permit(:name, :url, :category, :country, :city, :description)
+      params.require(:webcam).permit(:title, :image_url, :category, :player_url)
     end
 end

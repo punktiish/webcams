@@ -1,0 +1,22 @@
+<div class="overflow-hidden rounded-lg shadow transition hover:shadow-lg w-[400px]">
+    <%= link_to webcam do %>
+    <img alt="Webcam thumbnail"
+        src=<%= webcam.image_url.sub("thumbnail","preview") %>
+        class="h-56 w-full object-cover"
+    />
+    <div class="bg-white p-4 sm:p-6">
+        <div class="flex gap-1.5">
+            <% webcam.category.split(",").each do |cat| %>
+                <% if cat.length > 0 %>
+                    <span class="block text-xs text-gray-500">
+                        <%= cat %>
+                    </span>
+                <% end %>
+            <% end %>
+        </div>
+        <a href="#"><h3 class="mt-0.5 text-lg text-gray-900">
+            <%= webcam.title %>
+        </h3></a>
+    </div>
+    <% end %>
+</div>

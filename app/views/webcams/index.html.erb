@@ -32,35 +32,17 @@
         </div>
     </div>
     <div class="col-span-4 flex gap-4 flex-wrap justify-center">
-    <% @webcams.each do |webcam| %>
-        <% webcam.category.split(",").each do |cat| %>
-            <% if cat.length > 0 && (!params[":search"] || params[":search"].include?(cat)) %>
-                <article class="overflow-hidden rounded-lg shadow transition hover:shadow-lg w-[400px]">
-                <%= link_to webcam do %>
-                    <img alt="Webcam thumbnail"
-                        src=<%= webcam.image_url.sub("thumbnail","preview") %>
-                        class="h-56 w-full object-cover"
-                    />
-                    <div class="bg-white p-4 sm:p-6">
-                        <div class="flex gap-1.5">
-                            <% webcam.category.split(",").each do |cat| %>
-                                <% if cat.length > 0 %>
-                                    <span class="block text-xs text-gray-500">
-                                        <%= cat %>
-                                    </span>
-                                <% end %>
-                            <% end %>
-                        </div>
-                        <a href="#"><h3 class="mt-0.5 text-lg text-gray-900">
-                            <%= webcam.title %>
-                        </h3></a>
-                    </div>
-                <% end %>
-                </article>
-                <% break %>
-            <% end %> 
+        <% @webcams.each do |webcam| %>
+            <% webcam.category.split(",").each do |cat| %>
+                <% if !params[":search"] || params[":search"].include?(cat) %>
+                        <%= render "camera-card", webcam: webcam%>
+                    <% break %>
+                <% end %> 
+            <% end %>
+            <% if webcam.category.length == 0 %>
+                <%= render "camera-card", webcam: webcam%>
+            <% end %>
         <% end %>
-    <% end %>
     </div>
     <div class="flex justify-center col-span-5 mt-2">
         <%== pagy_nav(@pagy) %>
