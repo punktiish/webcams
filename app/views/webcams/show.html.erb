@@ -1,7 +1,7 @@
 <div class="flex items-center justify-center flex-wrap flex-col w-full">
     <h1 class="text-xl"><%= @webcam.title %></h1>
-    <div class="flex flex-wrap w-6/12 h-full justify-center items-center mt-4 relative">
-        <iframe src=<%= @webcam.player_url %> frameborder="0" class="w-full h-[700px]"></iframe>
+    <div class="flex flex-wrap w-8/12 h-full pt-[56%] overflow-hidden justify-center items-center mt-4 relative">
+        <iframe src=<%= @webcam.player_url %> frameborder="0" class="w-full h-full absolute top-0 left-0 bottom-0 right-0"></iframe>
     </div>
     <div class="flex w-full justify-center">
         <ul class="flex gap-4">
