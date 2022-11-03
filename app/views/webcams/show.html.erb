@@ -3,11 +3,11 @@
     <div class="flex flex-wrap w-6/12 h-full justify-center items-center mt-4 relative">
         <iframe src=<%= @webcam.player_url %> frameborder="0" class="w-full h-[700px]"></iframe>
     </div>
-    <div class="flex w-full justify-center hover:text-yellow-900">
+    <div class="flex w-full justify-center">
         <ul class="flex gap-4">
-            <li><%= link_to "Back", root_path %></li>
-            <li><%= link_to "Edit", edit_webcam_path(@webcam) %></li>
-            <li><%= link_to "Delete", webcam_path(@webcam), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
+            <li class="hover:text-yellow-900"><%= link_to "Back", root_path %></li>
+            <li class="hover:text-yellow-900"><%= link_to "Edit", edit_webcam_path(@webcam) %></li>
+            <li class="hover:text-yellow-900"><%= link_to "Delete", webcam_path(@webcam), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"} %></li>
         </ul>
     </div>
 </div>

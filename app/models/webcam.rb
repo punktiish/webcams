@@ -1,8 +1,9 @@
 class Webcam < ApplicationRecord
     def self.search(search)
-        puts "searching: #{search}"
-        myarray_with_percetage_signs = search.map {|val| "%#{val}%" }
-        where("category ILIKE ANY ( array[?] )", myarray_with_percetage_signs)
-        # select only unique
+        where("title ILIKE ?", "%#{search}%")
+    end
+    def self.searchwithcategories(categories,search) # todo: combine all of these somehow
+        myarray_with_percetage_signs = categories.map {|val| "%#{val}%" }
+        where("title ILIKE ? AND category ILIKE ANY ( array[?] )", "%#{search}%", myarray_with_percetage_signs)
     end
 end

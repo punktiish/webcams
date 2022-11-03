@@ -2,10 +2,13 @@ include Pagy::Backend
 class WebcamsController < ApplicationController
   def index
     if params[":search"]
-      @pagy, @webcams = pagy(Webcam.search(params[":search"]))
+      @pagy, @webcams = pagy(Webcam.searchwithcategories(params[":search"],params["find"]))
+    elsif params["find"] 
+      @pagy, @webcams = pagy(Webcam.search(params["find"]))
     else
       @pagy, @webcams = pagy(Webcam.all)
     end
+    
     @categories = {}
     Webcam.distinct.pluck(:category).each do |cat|
       cat.split(",").each do |s|

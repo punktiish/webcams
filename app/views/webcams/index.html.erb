@@ -1,6 +1,7 @@
-<div class="grid grid-cols-5 mt-16 p-6">
-    <div class="h-full">
+<div class="grid grid-cols-5 mt-8 p-6">
+    <div class="h-full mt-12">
         <%= form_tag(root_path, :method => "get", id: "search-form", :class=>"flex flex-wrap") do %>
+        <%= text_field_tag 'find', params["find"], class:'w-full mb-4 rounded' %>
         <span class="flex gap-1">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-horizontal" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
@@ -17,7 +18,7 @@
             <h1 class="font-bold">Filters</h1>
         </span>
         <div class="flex my-4 flex-wrap">
-            <% @categories.keys.each do |cat| %>
+            <% @categories.keys.sort.each do |cat| %>
                 <label class="flex justify-center items-center m-1 py-1 px-2 rounded-full text-slate-700 bg-slate-200 text-xs cursor-pointer">
                     <%= check_box_tag ":search[]", cat, false, class: "hidden" %>
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check hidden" width="16" height="16" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -31,7 +32,39 @@
         <% end %>
         </div>
     </div>
-    <div class="col-span-4 flex gap-4 flex-wrap justify-center">
+    <div class="col-span-4 flex gap-4 flex-wrap ml-24">
+        <div class="flex w-full h-max">
+        <% if params["find"] && !params["find"].empty? %>
+            <span class="flex justify-center items-center m-1 py-2 px-4 rounded-full text-slate-700 bg-slate-200 text-xs cursor-pointer">
+                Search: <%= params["find"] %>
+                <span class="ml-1">
+                    <%= link_to webcams_path(":search" => params[":search"] ,"find"=>"") do %>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    <% end %>
+                </span>
+            </span>
+        <% end %>
+        <% if params[":search"] %>
+            <% params[":search"].each do |cat| %>
+                <span class="flex justify-center items-center m-1 py-2 px-4 rounded-full text-slate-700 bg-slate-200 text-xs cursor-pointer">
+                    <%= cat %>
+                    <span class="ml-1">
+                        <%= link_to webcams_path(":search" => params[":search"].dup - [cat],"find"=>params["find"]) do %>
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-x" width="16" height="16" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        <% end %>
+                    </span>
+                </span>
+            <% end %>
+        <% end %>
+        </div>
         <% @webcams.each do |webcam| %>
             <% webcam.category.split(",").each do |cat| %>
                 <% if !params[":search"] || params[":search"].include?(cat) %>
@@ -42,6 +75,11 @@
             <% if webcam.category.length == 0 %>
                 <%= render "camera-card", webcam: webcam%>
             <% end %>
+        <% end %>
+        <% if @webcams.empty? %>
+            <div class="grid place-items-center w-full h-full">
+                <h1 class="text-2xl">no webcams match these filters :(</h1>
+            </div>
         <% end %>
     <div class="flex w-full justify-center  mt-2">
         <%== pagy_nav(@pagy) %>
