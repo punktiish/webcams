@@ -1,4 +1,4 @@
-<div class="grid grid-cols-5 mt-8 p-6">
+<div class="grid grid-cols-1 lg:grid-cols-5 mt-8 p-6">
     <div class="mt-8">
         <%= form_tag(root_path, :method => "get", id: "search-form", :class=>"flex flex-wrap") do %>
         <%= text_field_tag 'find', params["find"], placeholder: "Search...", class:'w-full mb-4 rounded' %>
@@ -32,7 +32,7 @@
         <% end %>
         </div>
     </div>
-    <div class="col-span-4 flex gap-4 flex-wrap ml-24">
+    <div class="col-span-4 flex gap-4 flex-wrap justify-center lg:ml-24">
         <div class="flex w-full h-max">
         <% if params["find"] && !params["find"].empty? %>
             <span class="flex justify-center items-center m-1 py-2 px-4 rounded-full text-slate-700 bg-slate-200 text-xs cursor-pointer">
