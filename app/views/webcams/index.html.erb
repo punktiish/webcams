@@ -1,7 +1,7 @@
 <div class="grid grid-cols-5 mt-8 p-6">
-    <div class="h-full mt-12">
+    <div class="mt-8">
         <%= form_tag(root_path, :method => "get", id: "search-form", :class=>"flex flex-wrap") do %>
-        <%= text_field_tag 'find', params["find"], class:'w-full mb-4 rounded' %>
+        <%= text_field_tag 'find', params["find"], placeholder: "Search...", class:'w-full mb-4 rounded' %>
         <span class="flex gap-1">
             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-adjustments-horizontal" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                 <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

@@ -9,7 +9,7 @@ class WebcamsController < ApplicationController
       @pagy, @webcams = pagy(Webcam.all)
     end
     
-    @categories = {}
+    @categories = {} 
     Webcam.distinct.pluck(:category).each do |cat|
       cat.split(",").each do |s|
         if !@categories.include?(s)
@@ -30,9 +30,9 @@ class WebcamsController < ApplicationController
   def update
     @webcam = Webcam.find(params[:id])
     if @webcam.update(webcam_params)
-      redirect_to @webcam
+      redirect_to webcam_path(@webcam)
     else
-      render 'edit'
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -48,10 +48,11 @@ class WebcamsController < ApplicationController
 
   def create
     @webcam = Webcam.new(webcam_params)
-    if @webcam.save
-      redirect_to @webcam
+    if @webcam.valid?
+      @webcam.save
+      redirect_to webcam_path(@webcam)
     else
-      render 'new'
+      render :new, status: :unprocessable_entity
     end
   end
 
